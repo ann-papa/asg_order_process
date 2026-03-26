@@ -10,7 +10,10 @@ st.set_page_config(page_title="Etsy 订单分类解析工具", layout="wide")
 st.title("📄 Etsy 订单 PDF 自动分类转 CSV (终极完整版)")
 
 # 2. 获取 API Key
-api_key = st.text_input("请输入 Google Gemini API Key:", type="password")
+if "GEMINI_API_KEY" in st.secrets:
+    api_key = st.secrets["GEMINI_API_KEY"]
+else:
+    api_key = st.text_input("未检测到系统密钥，请手动输入 Gemini API Key:", type="password")
 
 # 3. 文件上传组件
 uploaded_file = st.file_uploader("请上传 Etsy 订单 PDF 文件", type="pdf")
